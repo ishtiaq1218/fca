@@ -19,6 +19,32 @@ export class AppComponent implements AfterViewInit {
     });
 
 
+    $('#builder').queryBuilder({
+      filters: [
+        {
+          id: 'carName',
+          type: 'string'
+        },
+        {
+          id: 'gender',
+          type: 'string',
+          values: ['Male', 'Female']
+        },
+        {
+          id: 'countryName',
+          type: 'string'
+        },
+        {
+          id: 'time',
+          type: 'date'
+        },
+        {
+          id: 'modalYear',
+          type: 'integer'
+        }
+      ]
+    });
+
   }
 
   addNewContainer() {
@@ -26,7 +52,10 @@ export class AppComponent implements AfterViewInit {
     const html = $(`<div class="grid-stack-item" data-gs-x="0"
     data-gs-y="0" data-gs-width="4" data-gs-height="2">
     <div class="grid-stack-item-content"></div>
-    <div onclick="deleteContainer(event)" class="ui secondary button del-container">Delete</div>
+    <div class=" del-container">
+    <div onclick="deleteContainer(event)" class="ui secondary button">Delete</div>
+    <div onclick="dataSourceContainer(event)" class="ui secondary button data-source-container">Data Source</div>
+    </div>
       </div>`);
 
     this.gridStack.addWidget(html,
@@ -90,6 +119,11 @@ export class AppComponent implements AfterViewInit {
                 }
               }
             });
+
+
+            if ($(ctx).length) {
+              $(ctx).data('graph', myChart);
+            }
             break;
 
           case 'line chart':

@@ -27,6 +27,37 @@
       </div> -->
 
     </div>
+
+
+    <div class="ui modal data-source-modal">
+      <div class="header">
+        <span>Data Source</span>
+        <button onclick="newQuery()" class="ui primary button new-query-btn">New Query +</button>
+      </div>
+      <div class="scrolling content">
+        <div id="your_queries">
+          <p>Your Queries</p>
+          <ul class="ui list">
+            <li>
+              <button class="ui secondary button">default bar chart</button>
+            </li>
+          </ul>
+        </div>
+        <div style="display: none" id="new_query_board">
+          <div class="ui form">
+            <div class="field">
+              <label>Name</label>
+              <input id="queryName" type="text">
+            </div>
+          </div>
+          <div id="builder"></div>
+
+          <div class="ui primary button" onclick="createQueryClick()">Create</div>
+          <div class="ui secondary button" onclick="cancelCreateQueryClick()">Cancel</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 

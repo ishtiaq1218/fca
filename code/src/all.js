@@ -1,3 +1,4 @@
+
 function uuidv4() {
     return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
         (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
@@ -205,4 +206,115 @@ function deleteContainer(evt) {
     var item = $(evt.target).closest(".grid-stack-item");
 
     gridStack.removeWidget(item);
+}
+
+var container;
+
+function dataSourceContainer(evt) {
+    container = $(evt.target);
+
+    $('.data-source-modal')
+        .modal('show')
+        ;
+
+    listQuery()
+
+}
+
+function newQuery() {
+    $("#your_queries").hide();
+    $("#new_query_board").show();
+
+
+    $("#queryName").val('query_' + uuidv4());
+}
+
+function createQueryClick() {
+    var sql_raw = $('#builder').queryBuilder('getSQL', false, false);
+
+    const q = JSON.parse(localStorage.getItem('queries')) || [];
+    const allItem = q.push({
+        name: $("#queryName").val(),
+        val: sql_raw.sql
+    });
+
+    localStorage.setItem('queries', JSON.stringify(q));
+
+    $("#your_queries").show();
+    $("#new_query_board").hide();
+
+    listQuery();
+}
+
+function listQuery() {
+    const items = JSON.parse(localStorage.getItem('queries')) || [];
+
+    if (items) {
+        let html = `
+        <li>
+            <button class="ui primary button" onclick="showQueryList('default', event)">default bar chart</button>
+        </li>
+        `;
+
+        _.forEach(items, g => {
+            html += `
+            <li>
+              <button class="ui primary button" onclick="showQueryList('${g.name}', event)">${g.name}</button>
+            </li>
+            `
+        });
+
+        $("#your_queries > ul").html(html);
+    }
+}
+
+function cancelCreateQueryClick() {
+    $("#your_queries").show();
+    $("#new_query_board").hide();
+
+    listQuery();
+}
+
+function showQueryList(queryName, evt) {
+
+    const q = JSON.parse(localStorage.getItem('queries')) || [];
+    const f = _.find(q, g => g.name === queryName);
+
+    let query = '';
+
+    if (queryName === 'default') {
+
+    }
+    else {
+        query = f.val;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: 'https://us-central1-firebase-devcontrolpanel.cloudfunctions.net/wallpostDynamicMySqlQuery',
+        data: {
+            query
+        },
+        success: (data) => {
+
+            const ele = container.closest('.grid-stack-item').find('canvas');
+            const graph = ele.data('graph');
+            const labels = _.map(data, f => f.carName);
+            const dataNodes = _.map(data, f => f.countValue);
+            debugger;
+
+            graph.data.labels = labels;
+            graph.data.datasets[0].data = dataNodes;
+
+            graph.update();
+
+            
+        },
+        //dataType: dataType
+    });
+
+    $('.data-source-modal')
+                .modal('hide')
+                ;
+
 }
