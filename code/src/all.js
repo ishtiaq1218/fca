@@ -301,20 +301,20 @@ function showQueryList(queryName, evt) {
             const graph = ele.data('graph');
             const labels = _.map(data, f => f.carName);
             const dataNodes = _.map(data, f => f.countValue);
-            debugger;
+            
 
             graph.data.labels = labels;
             graph.data.datasets[0].data = dataNodes;
 
             graph.update();
 
-            
+
         },
         //dataType: dataType
     });
 
     $('.data-source-modal')
-                .modal('hide')
-                ;
+        .modal('hide')
+        ;
 
 }

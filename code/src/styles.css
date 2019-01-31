@@ -23,3 +23,14 @@
 .new-query-btn{
     float: right;
 }
+
+.modals.dimmer .ui.scrolling.modal {
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+
+
+
+
+
