@@ -8,6 +8,7 @@ import { Component, AfterViewInit } from '@angular/core';
 export class AppComponent implements AfterViewInit {
   title = 'app';
   gridStack = null;
+  model = 'Title';
 
 
   ngAfterViewInit(): void {
@@ -48,9 +49,13 @@ export class AppComponent implements AfterViewInit {
   }
 
   addNewContainer() {
-
-    const html = $(`<div class="grid-stack-item" data-gs-x="0"
+    const html = $(`
+    <div class="grid-stack-item" data-gs-x="0"
     data-gs-y="0" data-gs-width="4" data-gs-height="2">
+    <div style="color: white;text-align: center;">
+    <div style="width: 100%;font-size: 14px;font-weight: bold;letter-spacing: 2px;
+    " contenteditable="true" [textContent]="model" (input)="model=$event.target.textContent">Title</div>
+    </div>
     <div class="grid-stack-item-content"></div>
     <div class=" del-container">
     <div onclick="deleteContainer(event)" class="ui secondary button">Delete</div>
@@ -62,6 +67,8 @@ export class AppComponent implements AfterViewInit {
       0, 0, 4, 4);
 
     this.initNewContentScripts($('.grid-stack-item-content', html));
+
+    console.log('Title value : ' + this.model);
   }
 
 
@@ -111,11 +118,27 @@ export class AppComponent implements AfterViewInit {
               },
               options: {
                 scales: {
+                  xAxes: [{
+                    display: true,
+                    scaleLabel: {
+                      display: true,
+                      labelString: 'Month'
+                    },
+                    ticks: {
+                      fontColor: '#ffffff'
+                    }
+                  }],
                   yAxes: [{
                     ticks: {
-                      beginAtZero: true
+                      beginAtZero: true,
+                      fontColor: '#ffffff'
                     }
                   }]
+                },
+                title: {
+                  display: true,
+                  text: 'Bar Chart',
+                  fontColor: '#f0f0f0'
                 }
               }
             });
@@ -181,7 +204,8 @@ export class AppComponent implements AfterViewInit {
                 responsive: true,
                 title: {
                   display: true,
-                  text: 'Chart.js Line Chart'
+                  text: 'Line Chart',
+                  fontColor: '#f0f0f0'
                 },
                 tooltips: {
                   mode: 'index',
@@ -197,6 +221,9 @@ export class AppComponent implements AfterViewInit {
                     scaleLabel: {
                       display: true,
                       labelString: 'Month'
+                    },
+                    ticks: {
+                      fontColor: '#ffffff'
                     }
                   }],
                   yAxes: [{
@@ -204,6 +231,10 @@ export class AppComponent implements AfterViewInit {
                     scaleLabel: {
                       display: true,
                       labelString: 'Value'
+                    },
+                    ticks: {
+                      beginAtZero: true,
+                      fontColor: '#ffffff'
                     }
                   }]
                 }
@@ -275,6 +306,11 @@ export class AppComponent implements AfterViewInit {
                 'samples-filler-analyser': {
                   target: 'chart-analyser'
                 }
+              },
+              title: {
+                 display: true,
+                 text: 'Radar Chart',
+                 fontColor: '#f0f0f0'
               }
             };
 

@@ -1,0 +1,10 @@
+::ng-deep.grid-stack>.grid-stack-item>.grid-stack-item-content{
+    background-color: rgba(53, 53, 60, 92);
+    padding: 15px;
+    margin-top: 20px;
+}
+.editable {
+   border: none;
+   outline: none;
+   background: transparent;
+}

@@ -1,13 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 
 .grid-stack {
-    background: lightgoldenrodyellow;
+    /*background: lightgoldenrodyellow;*/
+    background-color: transparent;
 }
 
 .grid-stack-item-content {
-    color: #2c3e50;
+    /*color: #2c3e50;*/
+    color: white;
     text-align: center;
-    border:5px solid #18bc9c;
+    border: 1px solid #5A5A64;
+    border-radius: 5px;
 }
 
 .ui.button.create-new-container, .chart-btn{
@@ -17,7 +20,11 @@
 .del-container{
     position: absolute;
     bottom: 0;
-    left: 35%
+    padding: 5px 0px 5px 0px;
+    left: 35%;
+}
+.padd-top10{
+    padding-top: 10px;
 }
 
 .new-query-btn{
@@ -29,7 +36,45 @@
     margin-right: 15%;
 }
 
-
+/*New CSS*/
+@import url('https://fonts.googleapis.com/css?family=Roboto+Light');
+html, body {
+    overflow-x: hidden;
+    height: 100%;
+}
+body {
+    background: #fff;
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto-Light', sans-serif;
+    background-image: url(./assets/images/mainbg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.no-padd-left{
+    padding-left: 0px;
+}
+.no-padd-right{
+    padding-right: 0px;
+}
+.padd-left8{
+    padding-left: 8px;
+}
+.padd-top15{
+    padding-top: 15px;
+}
+.padd-top20{
+    padding-top: 20px;
+}
+.text-center{
+    text-align: center;
+}
+.m-btm30{
+    margin-bottom: 30px;
+}
+.m-top35{
+    margin-top: 35px;   
+}
 
 
 
